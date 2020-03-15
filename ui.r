@@ -10,7 +10,7 @@ fluidPage(
     tags$link(rel = "stylesheet", type = "text/css", href = "fontewesome.css")
   ),
   dashboardPage(
-    dashboardHeader(title = "Dr. Psico"),
+    dashboardHeader(title = "CoronaLytics"),
     dashboardSidebar(
       
       sidebarMenu(
@@ -22,18 +22,11 @@ fluidPage(
                   tags$div(id="loader",class="loader"),
       tabItems(
         tabItem(class="","dashboard",
-                box(class="boxes",
-                    tags$h4("Data type input"),
-                    a(id = "dicaTipoEntrada", "Dica",class="dica", href = "#"),
-                    selectInput(inputId = "inputDataType",
-                                "Input type",
-                                choices = c("File", "Relational DB"),
-                                width = 600)
-                )
+                 generalDashboardsPage()
         )
       )
     )
-)
+  )
 
 
 )
