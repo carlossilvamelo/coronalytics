@@ -2,7 +2,7 @@
 #------------------------ imports ------------------------
 #install.packages("readxl")
 #install.packages("ggplot2")
-#install.packages("stringr")
+# install.packages("stringr")
 #install.packages("shinyjs")
 #install.packages("shinyWidgets")
 #install.packages("shinydashboard")
@@ -10,8 +10,10 @@
 #devtools::install_github("hadley/shinySignals")
 #install.packages("dplyr")
 #install.packages("RMySQL")
-#install.packages("plotly")
-
+# install.packages("plotly")
+# install.packages("shiny")
+install.packages("stringi")
+library(stringi)
 #install.packages("stringr")
 library(RMySQL)
 library(plotly)
@@ -21,7 +23,7 @@ library(shinyjs)
 #library("stringr")
 #library("shinyjs")
 #library("stats")
-#library("compiler")
+#library("compiler"
 library(shiny)
 library(shinyWidgets)
 #library(jsonlite)
@@ -30,13 +32,13 @@ library(shinyWidgets)
 library(ggplot2)
 library(dplyr)
 library(shinydashboard)
-
+library(testthat)
 #--------------- constants -----
 COUNTRY_COLUMN = "COUNTRY_COLUMN"
 CITY_COLUMN = "CITY_COLUMN"
 CONFIRMED_COLUMN = "CONFIRMED_COLUMN"
 DEATHS_COLUMN = "DEATHS_COLUMN"
-RECOVERED_COLUMN = "RECOVERED_COLUMN"  
+RECOVERED_COLUMN = "RECOVERED_COLUMN" 
 OBSERVATION_DATE_COLUMN = "OBSERVATION_DATE_COLUMN"
 
 #----------------------- initializarions -----------------
@@ -74,6 +76,16 @@ importSource <- function(sourceName){
   }
   return(success)
 }
+
+pageComponents = list.files(paste(getwd(),sep = ""), recursive = TRUE, include.dirs = TRUE)
+files= c()
+for (i in 1:length(pageComponents)) {
+  if(stri_detect_regex(pageComponents[i], "Tests", case_insensitive=TRUE)){
+    files[i] = pageComponents[i]
+  }
+}
+na.omit(files)
+
 pageComponents = list.files(paste(getwd(),"/pages",sep = ""))
 for (pageComponent in pageComponents) {
   pageComponent = paste(getwd(),"/pages/",pageComponent,sep = "")
